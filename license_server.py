@@ -421,12 +421,12 @@ class CreateLicenseRequest(BaseModel):
 # ── ROUTES ───────────────────────────────────────────────────
 
 
-@app.get(rule="/")
+@app.get("/")
 def root():
     return {"service": "Kennartech License Server", "status": "running"}
 
 
-@app.post(rule="/api/verify-license")
+@app.post("/api/verify-license")
 async def verify_license(body: VerifyRequest):
     conn = get_db()
     row = conn.execute(
@@ -454,7 +454,7 @@ async def verify_license(body: VerifyRequest):
     }
 
 
-@app.post(rule="/api/create-license")
+@app.post("/api/create-license")
 async def create_license(body: CreateLicenseRequest):
     """Manually create a license key — protected by admin_secret."""
     if body.admin_secret != os.getenv(key="ADMIN_SECRET", default="my-admin-secret"):
@@ -482,7 +482,7 @@ async def create_license(body: CreateLicenseRequest):
     }
 
 
-@app.post(rule="/paystack/webhook")
+@app.post("/paystack/webhook")
 async def paystack_webhook(request: Request):
     """
     Paystack calls this after a successful payment.
