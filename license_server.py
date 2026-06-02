@@ -84,7 +84,7 @@ class CreateLicenseRequest(BaseModel):
 # ── ROUTES ────────────────────────────────────────
 
 
-@app.post(rule="/api/verify-license")
+@app.post("/api/verify-license")
 async def verify_license(body: VerifyRequest):
     """
     Called by the desktop app to check if a license key is valid.
@@ -117,7 +117,7 @@ async def verify_license(body: VerifyRequest):
     }
 
 
-@app.post(rule="/api/create-license")
+@app.post("/api/create-license")
 async def create_license(body: CreateLicenseRequest):
     """
     YOU call this endpoint manually (or after Paystack webhook confirms payment)
@@ -148,7 +148,7 @@ async def create_license(body: CreateLicenseRequest):
     }
 
 
-@app.post(rule="/paystack/webhook")
+@app.post("/paystack/webhook")
 async def paystack_webhook(request: Request):
     """
     Paystack calls this automatically when a payment completes.
@@ -198,6 +198,6 @@ async def paystack_webhook(request: Request):
     return JSONResponse({"status": "ok"})
 
 
-@app.get(rule="/")
+@app.get("/")
 def root():
     return {"service": "Kennartech License Server", "status": "running"}
