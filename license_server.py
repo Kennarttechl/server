@@ -444,12 +444,12 @@ async def send_license_email(
                 },
             )
         if resp.status_code == 200:
-            print(f"[EMAIL] ✅ Sent to {to_email}")
+            print(f"[EMAIL] Sent to {to_email}")
             return True
-        print(f"[EMAIL] ❌ {resp.status_code}: {resp.text}")
+        print(f"[EMAIL] {resp.status_code}: {resp.text}")
         return False
     except Exception as e:
-        print(f"[EMAIL] ❌ {e}")
+        print(f"[EMAIL] {e}")
         return False
 
 
@@ -566,7 +566,7 @@ async def paystack_webhook(request: Request):
         conn.close()
 
         print(
-            f"[LICENSE] ✅ Generated {key} for tenant={tenant_id} email={customer_email}"
+            f"[LICENSE]  Generated {key} for tenant={tenant_id} email={customer_email}"
         )
 
         asyncio.create_task(
